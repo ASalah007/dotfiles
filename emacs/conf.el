@@ -1,0 +1,248 @@
+;; remove gui elements
+(scroll-bar-mode -1) 
+(tool-bar-mode -1)   
+(tooltip-mode -1)    
+(set-fringe-mode 10)
+(menu-bar-mode -1)   
+(setq visible-bell t)
+(setq inhibit-startup-message t)
+
+;; relative number line
+(global-display-line-numbers-mode t)
+(setq display-line-numbers 'relative)
+(setq display-line-numbers-type 'relative)
+
+;; font
+(set-face-attribute 'default nil :height 135)
+
+(use-package doom-themes
+	:ensure t
+	:config
+	;; Global settings (defaults)
+	(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+				doom-themes-enable-italic nil) ; if nil, italics is universally disabled
+	(load-theme 'doom-dracula t)
+
+	;; Enable flashing mode-line on errors
+	(doom-themes-visual-bell-config)
+	;; Enable custom neotree theme (all-the-icons must be installed!)
+	(doom-themes-neotree-config)
+	;; or for treemacs users
+	(setq doom-themes-treemacs-theme "doom-colors") ; use "doom-colors" for less minimal icon theme
+	(doom-themes-treemacs-config)
+	;; Corrects (and improves) org-mode's native fontification.
+	(doom-themes-org-config))
+
+(use-package doom-modeline
+	:ensure t
+	:init (doom-modeline-mode 1))
+(use-package all-the-icons
+	:ensure t)
+
+(use-package org-bullets
+	:ensure t
+	:config
+	(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(setq org-src-tab-acts-natively t) ; for tabs to work insize src blocks
+(setq-default truncate-lines t) ; do not wrap lines in small screen
+
+(defun salah-enlarge-window-diagonally () ""
+			 (interactive)		 
+			 (enlarge-window 1)
+			 (enlarge-window-horizontally 3))
+
+(defun salah-shrink-window-diagonally () ""
+			 (interactive)
+			 (shrink-window 1)
+			 (shrink-window-horizontally 3))
+
+(defun salah-easy-curly () 
+			"this function will open a curly braces and put the cursor inside it properly indented"
+			 (interactive)
+
+			 (insert "{")
+			 (newline-and-indent)
+			 (insert "}")
+			 (previous-line)
+			 (end-of-line)
+			 (newline-and-indent))
+
+;; cursor hightlight
+(global-hl-line-mode t)
+;;(set-face-background 'hl-line "#DEDEDE")
+
+(setq scroll-margin 8
+			scroll-conservatively 101
+			scroll-preserve-screen-position t 
+			auto-window-vscroll nil)
+
+(setq-default tab-width 2)
+
+;; put all backup files in one folder
+;(setq make-backup-files nil)
+(setq auto-save-default nil)
+(setq backup-directory-alist '((""."~/main/.emacs/emacs-backup")))
+
+;(org-babel-do-load-languages
+; 'org-babel-load-languages
+; '((python . t)))
+
+(use-package counsel
+		:ensure t)
+
+	(use-package ivy
+		:ensure t)
+
+	(use-package swiper
+		:ensure t
+		:config
+		(ivy-mode 1)
+		(setq ivy-use-virtual-buffers t)
+		(setq enable-recursive-minibuffers t)
+		;; enable this if you want `swiper' to use it
+		;; (setq search-default-mode #'char-fold-to-regexp)
+		(global-set-key "\C-s" 'swiper)
+		(global-set-key (kbd "C-c C-r") 'ivy-resume)
+		(global-set-key (kbd "<f6>") 'ivy-resume)
+		(global-set-key (kbd "M-x") 'counsel-M-x)
+		(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+		(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+		(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+		(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+		(global-set-key (kbd "<f1> l") 'counsel-find-library)
+		(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+		(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+		(global-set-key (kbd "C-c g") 'counsel-git)
+		(global-set-key (kbd "C-c j") 'counsel-git-grep)
+		(global-set-key (kbd "C-c k") 'counsel-ag)
+		(global-set-key (kbd "C-x l") 'counsel-locate)
+		(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+		(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
+
+	(use-package company
+		:ensure t
+		:config
+		(company-mode)
+		(add-hook 'after-init-hook 'global-company-mode) )
+
+	(use-package tree-sitter
+		:ensure t
+		:config
+		(global-tree-sitter-mode))
+
+	(use-package tree-sitter-langs
+		:ensure t)
+
+;	(use-package lsp-mode
+;	:init
+;	;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;	(setq lsp-keymap-prefix "C-c l")
+;	:hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+;				 (python-mode . lsp)
+;				 ;; if you want which-key integration
+;				 (lsp-mode . lsp-enable-which-key-integration))
+;	:commands lsp)
+
+(use-package which-key
+	:ensure t
+	:config (which-key-mode))
+
+;; better undoing also required for evil mode 
+(use-package undo-tree
+	:ensure t
+	:config
+	(global-undo-tree-mode))
+
+;; project tree
+(use-package neotree
+	:ensure t
+	:bind ("M-m" . neotree-toggle))
+
+(setq neo-theme (if(display-graphic-p) 'icons 'arrow))
+(add-hook 'neotree-mode-hook
+					(lambda ()
+						(define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+						(define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
+						(define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+						(define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+						(define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
+						(define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
+						(define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
+						(define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
+						(define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
+(setq neo-smart-open t)
+
+(use-package avy
+	:ensure t
+	:bind ("M-s" . avy-goto-line))
+
+(use-package lorem-ipsum
+	:ensure t)
+(global-set-key (kbd "C-c C-l s") 'lorem-ipsum-insert-sentences)
+(global-set-key (kbd "C-c C-l p") 'lorem-ipsum-insert-paragraphs)
+
+;; vim key bindings 
+(use-package evil
+	:ensure t
+
+	:init
+	(setq evil-want-C-u-scroll t)
+	(setq evil-want-keybinding nil)
+	(setq evil-want-C-u-delete t)
+	(setq evil-want-C-w-in-emacs-state t)
+	(setq evil-shift-width 2)
+	(setq visual-line-mode t)
+	:config
+	(evil-mode 1)
+	(define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+
+	;; wrapped line is like a new line
+	;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+	;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+	(evil-set-initial-state 'org-mode 'emacs)
+	(evil-set-initial-state 'dired-mode 'emacs)
+	:custom
+	(evil-undo-system 'undo-tree))
+
+(use-package projectile
+	:diminish projectile-mode
+	:config (projectile-mode)
+	:custom ((projectile-completion-system 'ivy))
+	:bind-keymap
+		("<leader>p" . projectile-command-map)
+	:init
+		(setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+	:config (counsel-projectile-mode))
+
+;; treat esc as <c-g>
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; font resizing
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+;; c-s to save
+(global-set-key (kbd "C-s") 'save-buffer)
+(global-set-key (kbd "C-x C-s") 'swiper)
+
+
+;; better window management
+(global-set-key (kbd "S-+") 'enlarge-window)
+(global-set-key (kbd "S--") 'shrink-window)
+(global-set-key (kbd "M-+") 'enlarge-window-horizontally)
+(global-set-key (kbd "M--") 'shrink-window-horizontally)
+(global-set-key (kbd "M-S-+") 'salah-enlarge-window-diagonally) ; this function is defined in functionality section above 
+(global-set-key (kbd "M-S--") 'salah-shrink-window-diagonally)  
+
+;; easy curly
+;;(define-key evil-insert-state-map (kbd "C-j") 'salah-easy-curly)
+
+;; set space to be leader key
+(evil-set-leader 'normal (kbd "SPC"))
+
+;; files management
+(evil-define-key 'normal 'global (kbd "<leader>fo") 'counsel-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>fl") 'counsel-switch-buffer)

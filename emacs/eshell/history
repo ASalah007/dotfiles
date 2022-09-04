@@ -1,0 +1,5 @@
+ls
+rm init.el\~ myinit.org\~  #*# README.org~
+ls
+vim
+nvim 

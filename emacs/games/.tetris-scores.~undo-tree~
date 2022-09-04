@@ -1,0 +1,10 @@
+(undo-tree-save-format-version . 1)
+"c4fa0c9301ee3b9ee04d7a1063536c11142cb14d"
+[nil nil nil nil (25337 16880 654611 538000) 0 nil]
+([nil nil ((1 . 58) ("00012	Sun Aug 14 20:41:52 2022	Ahmed <asalah007@ahmed-PC>" . -1) (undo-tree-id0 . -57) ("
+" . 59) (undo-tree-id1 . -1) (1 . 59) ("00012	Sun Aug 14 20:41:52 2022	Ahmed <asalah007@ahmed-PC>" . 1) (1 . 59) (t . -1)) nil (25337 16880 654606 931000) 0 nil])
+([nil current ((1 . 116) ("00012	Sun Aug 14 20:41:52 2022	Ahmed <asalah007@ahmed-PC>" . -1) (undo-tree-id2 . -57) ("00000	Sun Aug 14 20:42:39 2022	Ahmed <asalah007@ahmed-PC>
+" . 1) ("
+" . 117) (undo-tree-id3 . -1) (1 . 117) ("00012	Sun Aug 14 20:41:52 2022	Ahmed <asalah007@ahmed-PC>
+00000	Sun Aug 14 20:42:39 2022	Ahmed <asalah007@ahmed-PC>" . 1) (59 . 117) (t 25337 16880 658093 8000)) nil (25337 16927 376212 985000) 0 nil])
+nil
