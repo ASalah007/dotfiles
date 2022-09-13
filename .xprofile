@@ -1,0 +1,4 @@
+xset r rate 210 38
+xset s off
+xset -dpms
+xset s noblank
