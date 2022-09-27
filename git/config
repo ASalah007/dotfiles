@@ -3,6 +3,7 @@
 	email = ahmed_abdelsamie@outlook.com
 [core]
 	editor = nvim
+  pager = 
 [init]
 	defaultBranch = main
 [difftool]
