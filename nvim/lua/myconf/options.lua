@@ -28,11 +28,13 @@ o.smartcase = true
 vim.opt.completeopt= {menu,menuone,noselect,preview}
 
 -- fast lsp check
-o.updatetime = 300
+o.updatetime = 500
 
 -- folding
-o.foldmethod = "manual"
-o.foldlevelstart = 2
+-- o.foldmethod = "manual"
+-- o.foldlevelstart = 2
 
 -- one global status line
 o.laststatus=3
+
+vim.cmd('colorscheme carbonfox')
