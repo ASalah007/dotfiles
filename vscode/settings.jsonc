@@ -1,0 +1,59 @@
+{
+  // UI
+  "workbench.editor.showTabs": "single",
+  "workbench.startupEditor": "none",
+  "workbench.editor.empty.hint": "hidden",
+  "zenMode.showTabs": "none",
+  "breadcrumbs.enabled": false,
+  "window.zoomLevel": 0,
+
+  // Coding
+  "editor.formatOnSave": true,
+  "editor.minimap.autohide": true,
+  "editor.suggestSelection": "first",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "files.autoSave": "afterDelay",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+
+  // vim settings
+  "vim.overrideCopy": false,
+  "vim.useSystemClipboard": true,
+  "keyboard.dispatch": "keyCode",
+
+  // Explorer (files tree)
+  "files.exclude": { "**/node_modules": true },
+  "explorer.confirmDelete": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
+
+  // terminal
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+  "python.languageServer": "Pylance",
+  "python.analysis.autoImportCompletions": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
+
+  // extension settings:
+  "gitlens.mode.active": "zen",
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.views.commitDetails.files.layout": "list"
+}
