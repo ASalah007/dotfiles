@@ -39,7 +39,7 @@
   },
 
   {
-    "key": "ctrl+shift+k", // new keyboard can'e read ctrl+shift+p
+    "key": "ctrl+shift+k", // new keyboard can't read ctrl+shift+p
     "command": "workbench.action.showCommands"
   }
 ]
