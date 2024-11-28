@@ -1,5 +1,5 @@
 [
-  // window management
+  //// window management
   {
     "key": "alt+n",
     "command": "workbench.files.action.showActiveFileInExplorer"
@@ -22,14 +22,23 @@
     "key": "ctrl+e", // cancel quick open (annoying in terminal)
     "command": "-workbench.action.quickOpen"
   },
+  {
+    "key": "alt+w alt+c",
+    "command": "workbench.action.closeEditorsAndGroup"
+  },
+  {
+    "key": "shift+alt+l",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  //// end window management
 
-  // git commands
+  //// git commands
   {
     "key": "alt+k alt+o",
     "command": "git.checkout"
   },
   {
-    "key": "alt+k alt+l",
+    "key": "alt+k alt+j",
     "command": "git.fetch"
   },
   {
@@ -37,9 +46,52 @@
     "command": "workbench.view.scm",
     "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
   },
+  //// end git commands
+
+  //// editor
+  {
+    "key": "alt+i",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  //// end editor
+
+  //// others
+  {
+    "key": "ctrl+shift+k", // new keyboard can'e read ctrl+shift+p
+    "command": "workbench.action.showCommands"
+  },
+  //// end others
+
+  //// disable competing keybindings
+  {
+    "key": "ctrl+p",
+    "command": "-extension.vim_ctrl+p",
+    "when": "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+  },
+  {
+    "key": "ctrl+k ctrl+w",
+    "command": "-workbench.action.closeAllEditors"
+  },
+  {
+    "key": "ctrl+k ctrl+i",
+    "command": "-editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "-liveshare.join",
+    "when": "liveshare:state != 'Joined' && liveshare:state != 'Shared'"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "-extension.vim_ctrl+k",
+    "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
+  },
+  //// end disable competing keybindings
 
   {
-    "key": "ctrl+shift+k", // new keyboard can't read ctrl+shift+p
-    "command": "workbench.action.showCommands"
+    "key": "alt+w alt+e",
+    "command": "workbench.action.minimizeOtherEditors"
   }
 ]
